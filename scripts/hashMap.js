@@ -1,3 +1,5 @@
+import LinkedList from './linkedList.js';
+
 const multiplicationConst = (Math.sqrt(5) - 1) / 2;
 
 class HashMap {
@@ -6,6 +8,8 @@ class HashMap {
     this.buckets = [];
     this.maxSize = 16;
     this.capacity = 1;
+
+    this.#populateBuckets();
   }
 
   // TODO: improve for longer strings (converts to 0 after certain threshold).
@@ -29,12 +33,20 @@ class HashMap {
     if (this.#needsExpanding()) {
       this.#expand();
     }
-
     const index = this.hash(key);
-    this.buckets[index] = [key, value];
+
+    this.buckets[index].append([key, value]);
   }
 
-  #expand() {}
+  #populateBuckets() {
+    for (let i = 0; i < this.maxSize; i++) {
+      this.buckets[i] = new LinkedList();
+    }
+  }
+
+  #expand() {
+    this.#populateBuckets();
+  }
 
   #needsExpanding() {
     const bucketsNeeded = Math.floor(this.maxSize * this.loadFactor);
