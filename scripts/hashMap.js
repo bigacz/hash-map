@@ -5,10 +5,10 @@ class HashMap {
     this.loadFactor = 0.75;
     this.buckets = [];
     this.maxSize = 16;
-    this.capacity = 0;
+    this.capacity = 1;
   }
 
-  // TODO: improve for longer strings (converts to 0 after threshold)
+  // TODO: improve for longer strings (converts to 0 after certain threshold).
   hash(value) {
     let valueArray = value.split('');
     let hashCode = 1;
@@ -25,12 +25,21 @@ class HashMap {
     return index;
   }
 
-  // #expand() {}
-  //
-  // #needsExpanding() {
-  //   if (key.size) {
-  //   }
-  // }
+  set(key, value) {
+    if (this.#needsExpanding()) {
+      this.#expand();
+    }
+
+    const index = this.hash(key);
+    this.buckets[index] = [key, value];
+  }
+
+  #expand() {}
+
+  #needsExpanding() {
+    const bucketsNeeded = Math.floor(this.maxSize * this.loadFactor);
+    return this.capacity >= bucketsNeeded;
+  }
 }
 
 export default HashMap;
