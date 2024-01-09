@@ -3,8 +3,8 @@ class LinkedList {
     this.head = null;
   }
 
-  append(value) {
-    const node = new Node(value);
+  append(key, value) {
+    const node = new Node(key, value);
     let currentNode = this.head;
 
     if (currentNode === null) {
@@ -19,10 +19,11 @@ class LinkedList {
     currentNode.next = node;
   }
 
-  prepend(value) {
+  prepend(key, value) {
     const temp = this.head;
 
-    const node = new Node(value, this.head);
+    const node = new Node(key, value);
+    node.next = this.head;
     this.head = node;
   }
 
@@ -94,7 +95,7 @@ class LinkedList {
     let currentNode = this.head;
 
     while (currentNode !== null) {
-      if (currentNode.value === searched) {
+      if (currentNode.key === searched) {
         return true;
       }
       currentNode = currentNode.next;
@@ -108,7 +109,7 @@ class LinkedList {
 
     let index = 0;
     while (currentNode !== null) {
-      if (currentNode.value === searched) {
+      if (currentNode.key === searched) {
         return index;
       }
 
@@ -121,7 +122,7 @@ class LinkedList {
     let nodeString = '';
     let currentNode = this.head;
     while (currentNode !== null) {
-      nodeString += `( ${currentNode.value} ) -> `;
+      nodeString += `( ${currentNode.key} ) -> `;
 
       currentNode = currentNode.next;
     }
@@ -131,16 +132,16 @@ class LinkedList {
     return nodeString;
   }
 
-  insertAt(value, insertIndex) {
+  insertAt(key, insertIndex, value) {
     if (insertIndex === 0) {
-      this.prepend(value);
+      this.prepend(key, value);
       return;
     }
 
     let listSize = this.getSize();
 
     if (insertIndex === listSize) {
-      this.append(value);
+      this.append(key, value);
       return;
     }
     if (insertIndex > listSize || insertIndex < 0) {
@@ -153,7 +154,8 @@ class LinkedList {
     let currentNode = this.head;
     while (currentNode !== null) {
       if (index === insertIndex) {
-        const node = new Node(value, currentNode);
+        const node = new Node(key, value);
+        node.next = currentNode;
         previousNode.next = node;
       }
 
@@ -193,9 +195,10 @@ class LinkedList {
 }
 
 class Node {
-  constructor(value = null, next = null) {
+  constructor(key = null, value = null) {
+    this.key = key;
     this.value = value;
-    this.next = next;
+    this.next = null;
   }
 }
 

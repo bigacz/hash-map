@@ -33,9 +33,14 @@ class HashMap {
     if (this.#needsExpanding()) {
       this.#expand();
     }
-    const index = this.hash(key);
 
-    this.buckets[index].append([key, value]);
+    const bucketIndex = this.hash(key);
+    const nodeIndex = this.buckets[index].find('');
+
+    if (true)
+      // CHECK IF VALUE EXISTS
+
+      this.buckets[index].append({ key, value });
   }
 
   #populateBuckets() {
@@ -45,6 +50,9 @@ class HashMap {
   }
 
   #expand() {
+    //
+
+    //
     this.#populateBuckets();
   }
 
