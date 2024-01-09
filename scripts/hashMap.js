@@ -47,8 +47,22 @@ class HashMap {
     }
   }
 
+  get(key) {
+    const hash = this.hash(key);
+    const bucket = this.buckets[hash];
+
+    const nodeIndex = bucket.find(key);
+    if (nodeIndex !== undefined) {
+      const node = bucket.getAt(nodeIndex);
+      console.log(node);
+      return node.value;
+    }
+
+    return null;
+  }
+
   #populateBuckets() {
-    for (let i = 0; i < this.maxSize; i++) {
+    for (let i = 0; i < this.maxSize; i += 1) {
       this.buckets[i] = new LinkedList();
     }
   }
