@@ -2,5 +2,6 @@ import HashMap from './scripts/hashMap.js';
 
 const test = new HashMap();
 
-console.log(test.set('okay', 'fine'));
+test.set('okay', 'fine');
+test.set('okay', 'supersssss');
 console.log(test.buckets);

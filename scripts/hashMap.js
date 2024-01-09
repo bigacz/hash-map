@@ -35,12 +35,16 @@ class HashMap {
     }
 
     const bucketIndex = this.hash(key);
-    const nodeIndex = this.buckets[index].find('');
+    const nodeIndex = this.buckets[bucketIndex].find(key);
 
-    if (true)
-      // CHECK IF VALUE EXISTS
+    const bucket = this.buckets[bucketIndex];
 
-      this.buckets[index].append({ key, value });
+    if (nodeIndex !== undefined) {
+      const node = bucket.getAt(nodeIndex);
+      node.value = value;
+    } else {
+      bucket.append(key, value);
+    }
   }
 
   #populateBuckets() {
@@ -51,7 +55,7 @@ class HashMap {
 
   #expand() {
     //
-
+    // TODO
     //
     this.#populateBuckets();
   }
