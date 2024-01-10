@@ -11,7 +11,6 @@ test.set('fasfas', 'super');
 test.set('fasf', 'fine');
 test.set('asfas', 'super');
 test.set('dasdasd', 'super');
-test.set('dasdasd', 'super');
 test.set('gdfgdg', 'super');
 test.set('zxczxcv', 'works');
 test.set('aqwdasd', 'super');
@@ -24,4 +23,4 @@ test.remove('zxczxcv');
 test.remove('aqwdasd');
 test.remove('zxcx');
 
-console.log(test.buckets);
+console.log(test.getLength());

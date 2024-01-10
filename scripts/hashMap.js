@@ -83,6 +83,16 @@ class HashMap {
     }
   }
 
+  getLength() {
+    const length = this.buckets.reduce((accumulator, currentBucket) => {
+      const currentSize = currentBucket.getSize();
+
+      return accumulator + currentSize;
+    }, 0);
+
+    return length;
+  }
+
   #populateBuckets() {
     for (let i = 0; i < this.maxSize; i += 1) {
       this.buckets[i] = new LinkedList();
