@@ -19,5 +19,9 @@ test.set('zxcx', 'super');
 test.set('asdg', 'super');
 test.set('', 'super');
 
+test.remove('fasf');
+test.remove('zxczxcv');
+test.remove('aqwdasd');
+test.remove('zxcx');
+
 console.log(test.buckets);
-console.log(test.has(''));

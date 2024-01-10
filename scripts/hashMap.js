@@ -54,7 +54,7 @@ class HashMap {
     const nodeIndex = bucket.find(key);
     if (nodeIndex !== undefined) {
       const node = bucket.getAt(nodeIndex);
-      console.log(node);
+
       return node.value;
     }
 
@@ -71,6 +71,16 @@ class HashMap {
     }
 
     return false;
+  }
+
+  remove(key) {
+    const hash = this.hash(key);
+    const bucket = this.buckets[hash];
+
+    const nodeIndex = bucket.find(key);
+    if (nodeIndex !== undefined) {
+      bucket.removeAt(nodeIndex);
+    }
   }
 
   #populateBuckets() {
