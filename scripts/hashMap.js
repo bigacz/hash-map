@@ -61,6 +61,18 @@ class HashMap {
     return null;
   }
 
+  has(key) {
+    const hash = this.hash(key);
+    const bucket = this.buckets[hash];
+
+    const nodeIndex = bucket.find(key);
+    if (nodeIndex !== undefined) {
+      return true;
+    }
+
+    return false;
+  }
+
   #populateBuckets() {
     for (let i = 0; i < this.maxSize; i += 1) {
       this.buckets[i] = new LinkedList();

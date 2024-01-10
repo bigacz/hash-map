@@ -17,6 +17,7 @@ test.set('zxczxcv', 'works');
 test.set('aqwdasd', 'super');
 test.set('zxcx', 'super');
 test.set('asdg', 'super');
+test.set('', 'super');
 
 console.log(test.buckets);
-console.log(test.get('zxczxcv'));
+console.log(test.has(''));
