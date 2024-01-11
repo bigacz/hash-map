@@ -7,7 +7,7 @@ class HashMap {
     this.loadFactor = 0.75;
     this.buckets = [];
     this.maxSize = 16;
-    this.capacity = 1;
+    this.capacity = 0;
 
     this.#populateBuckets();
   }
@@ -30,9 +30,9 @@ class HashMap {
   }
 
   set(key, value) {
-    if (this.#needsExpanding()) {
-      this.#expand();
-    }
+    // if (this.#needsExpanding()) {
+    //   this.#expand();
+    // }
 
     const bucketIndex = this.hash(key);
     const nodeIndex = this.buckets[bucketIndex].find(key);
@@ -43,6 +43,10 @@ class HashMap {
       const node = bucket.getAt(nodeIndex);
       node.value = value;
     } else {
+      if (bucket.getSize() === 0) {
+        // probably fixed
+        this.capacity += 1;
+      }
       bucket.append(key, value);
     }
   }
@@ -80,6 +84,10 @@ class HashMap {
     const nodeIndex = bucket.find(key);
     if (nodeIndex !== undefined) {
       bucket.removeAt(nodeIndex);
+
+      if (bucket.getSize() === 0) {
+        this.capacity -= 1;
+      }
     }
   }
 
