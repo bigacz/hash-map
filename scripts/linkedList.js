@@ -192,6 +192,10 @@ class LinkedList {
       currentNode = currentNode.next;
     }
   }
+
+  clear() {
+    this.head = null;
+  }
 }
 
 class Node {

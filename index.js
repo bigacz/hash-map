@@ -24,3 +24,9 @@ test.remove('aqwdasd');
 test.remove('zxcx');
 
 console.log(test.getLength());
+test.clear();
+console.log(test.buckets);
+test.set('zxczxcv', 'works');
+test.set('aqwdasdsadsasad', 'super');
+test.set('zxcxds', 'super');
+console.log(test.buckets);
