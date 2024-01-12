@@ -107,7 +107,32 @@ class HashMap {
     });
   }
 
-  keys() {}
+  getKeys() {
+    const keys = this.buckets.reduce((accumulator, currentBucket) => {
+      const currentKeys = currentBucket.getKeys();
+      return accumulator.concat(currentKeys);
+    }, []);
+
+    return keys;
+  }
+
+  getValues() {
+    const keys = this.buckets.reduce((accumulator, currentBucket) => {
+      const currentKeys = currentBucket.getValues();
+      return accumulator.concat(currentKeys);
+    }, []);
+
+    return keys;
+  }
+
+  getEntries() {
+    const keys = this.buckets.reduce((accumulator, currentBucket) => {
+      const currentKeys = currentBucket.getEntries();
+      return accumulator.concat(currentKeys);
+    }, []);
+
+    return keys;
+  }
 
   #populateBuckets() {
     for (let i = 0; i < this.maxSize; i += 1) {
