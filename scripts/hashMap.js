@@ -30,9 +30,9 @@ class HashMap {
   }
 
   set(key, value) {
-    // if (this.#needsExpanding()) {
-    //   this.#expand();
-    // }
+    if (this.#needsExpanding()) {
+      this.#expand();
+    }
 
     const bucketIndex = this.hash(key);
     const nodeIndex = this.buckets[bucketIndex].find(key);
@@ -141,10 +141,22 @@ class HashMap {
   }
 
   #expand() {
+    this.maxSize *= 2;
+    const entries = this.getEntries();
+    this.capacity = 0;
+
+    this.#populateBuckets();
+    this.#addEntries(entries);
     //
     // TODO
     //
-    this.#populateBuckets();
+  }
+
+  #addEntries(array = []) {
+    array.forEach((element) => {
+      const [key, value] = element;
+      this.set(key, value);
+    });
   }
 
   #needsExpanding() {
