@@ -107,6 +107,8 @@ class HashMap {
     });
   }
 
+  keys() {}
+
   #populateBuckets() {
     for (let i = 0; i < this.maxSize; i += 1) {
       this.buckets[i] = new LinkedList();
