@@ -10,5 +10,3 @@ Provides a class `HashMap` with these methods:
 - `getKeys()` returns an array containing all keys inside the HashMap.
 - `getValues()` returns an array containing all values inside the HashMap.
 - `getEntries()` returns an array containing key-value pairs in the this format `[key, value]`
-
-### Traversal methods

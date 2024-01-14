@@ -1,4 +1,4 @@
-import LinkedList from './linkedList.js';
+import LinkedList from './linkedListSet.js';
 
 class HashMap {
   constructor() {
@@ -40,7 +40,6 @@ class HashMap {
       node.value = value;
     } else {
       if (bucket.getSize() === 0) {
-        // probably fixed
         this.capacity += 1;
       }
       bucket.append(key, value);
