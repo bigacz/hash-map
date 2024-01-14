@@ -25,7 +25,7 @@ class HashMap {
     return index;
   }
 
-  set(key, value) {
+  set(key) {
     if (this.#needsExpanding()) {
       this.#expand();
     }
@@ -35,29 +35,10 @@ class HashMap {
 
     const bucket = this.buckets[bucketIndex];
 
-    if (nodeIndex !== undefined) {
-      const node = bucket.getAt(nodeIndex);
-      node.value = value;
-    } else {
-      if (bucket.getSize() === 0) {
-        this.capacity += 1;
-      }
-      bucket.append(key, value);
+    if (bucket.getSize() === 0) {
+      this.capacity += 1;
     }
-  }
-
-  get(key) {
-    const hash = this.hash(key);
-    const bucket = this.buckets[hash];
-
-    const nodeIndex = bucket.find(key);
-    if (nodeIndex !== undefined) {
-      const node = bucket.getAt(nodeIndex);
-
-      return node.value;
-    }
-
-    return null;
+    bucket.append(key);
   }
 
   has(key) {
@@ -111,24 +92,6 @@ class HashMap {
     return keys;
   }
 
-  getValues() {
-    const keys = this.buckets.reduce((accumulator, currentBucket) => {
-      const currentKeys = currentBucket.getValues();
-      return accumulator.concat(currentKeys);
-    }, []);
-
-    return keys;
-  }
-
-  getEntries() {
-    const keys = this.buckets.reduce((accumulator, currentBucket) => {
-      const currentKeys = currentBucket.getEntries();
-      return accumulator.concat(currentKeys);
-    }, []);
-
-    return keys;
-  }
-
   #populateBuckets() {
     for (let i = 0; i < this.maxSize; i += 1) {
       this.buckets[i] = new LinkedList();
@@ -137,20 +100,16 @@ class HashMap {
 
   #expand() {
     this.maxSize *= 2;
-    const entries = this.getEntries();
+    const entries = this.getKeys();
     this.capacity = 0;
 
     this.#populateBuckets();
     this.#addEntries(entries);
-    //
-    // TODO
-    //
   }
 
   #addEntries(array = []) {
     array.forEach((element) => {
-      const [key, value] = element;
-      this.set(key, value);
+      this.set(element);
     });
   }
 

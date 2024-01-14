@@ -142,9 +142,6 @@ class HashMap {
 
     this.#populateBuckets();
     this.#addEntries(entries);
-    //
-    // TODO
-    //
   }
 
   #addEntries(array = []) {
