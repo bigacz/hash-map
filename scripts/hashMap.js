@@ -1,7 +1,5 @@
 import LinkedList from './linkedList.js';
 
-const multiplicationConst = (Math.sqrt(5) - 1) / 2;
-
 class HashMap {
   constructor() {
     this.loadFactor = 0.75;
