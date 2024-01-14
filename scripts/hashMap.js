@@ -12,19 +12,17 @@ class HashMap {
     this.#populateBuckets();
   }
 
-  // TODO: improve for longer strings (converts to 0 after certain threshold).
   hash(value) {
     let valueArray = value.split('');
-    let hashCode = 1;
+    let hashCode = BigInt(1);
 
-    let primeNumber = 31;
+    let primeNumber = BigInt(31);
     valueArray.forEach((character) => {
-      hashCode = primeNumber * hashCode + character.charCodeAt(0);
+      hashCode =
+        primeNumber * BigInt(hashCode) + BigInt(character.charCodeAt(0));
     });
 
-    let index = Math.floor(
-      this.maxSize * ((hashCode * multiplicationConst) % 1)
-    );
+    let index = Number(hashCode % BigInt(this.maxSize));
 
     return index;
   }
